@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Be My Valentine?</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #fce4ec; /* Light pink background */
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            overflow: hidden;
+            flex-direction: column;
+        }
+
+        .container {
+            text-align: center;
+            position: relative;
+        }
+
+        img {
+            width: 200px; /* Adjust size for mobile */
+            height: auto;
+            border-radius: 10px;
+        }
+
+        h1 {
+            color: #d81b60;
+            font-size: 2rem;
+            margin: 20px 0;
+            padding: 0 10px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 12px 25px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap; /* Keeps text on one line */
+        }
+
+        #yes-btn {
+            background-color: #4caf50;
+            color: white;
+            font-weight: bold;
+            z-index: 10;
+        }
+
+        #no-btn {
+            background-color: #f44336;
+            color: white;
+            font-weight: bold;
+        }
+
+        /* Success message style */
+        .success-message {
+            font-size: 1.8rem;
+            color: #d81b60;
+            font-weight: bold;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="https://media.tenor.com/DnRnO5x1XgAAAAAi/mochi-cat.gif" alt="Cute Cat GIF" id="main-image">
+        
+        <h1 id="question">Will you be my Valentine?</h1>
+        
+        <div class="buttons">
+            <button id="yes-btn" onclick="handleYesClick()">Yes</button>
+            <button id="no-btn" onclick="handleNoClick()">No</button>
+        </div>
+    </div>
+
+    <script>
+        const messages = [
+            "Are you sure?",
+            "Really sure??",
+            "Pookie please...",
+            "Just think about it!",
+            "If you say no, I will be really sad...",
+            "I will be very very very sad...",
+            "Ok fine, I will stop asking...",
+            "Just kidding, say yes please! ❤️"
+        ];
+
+        let messageIndex = 0;
+
+        function handleNoClick() {
+            const noBtn = document.querySelector('#no-btn');
+            const yesBtn = document.querySelector('#yes-btn');
+            
+            // Change the text of the No button
+            noBtn.textContent = messages[messageIndex];
+            
+            // Cycle through messages
+            messageIndex = (messageIndex + 1) % messages.length;
+            
+            // Make the Yes button bigger
+            const currentSize = parseFloat(window.getComputedStyle(yesBtn).fontSize);
+            yesBtn.style.fontSize = `${currentSize * 1.5}px`;
+            
+            // Increase padding to make the button look proportionate
+            const currentPadding = parseFloat(window.getComputedStyle(yesBtn).paddingTop);
+            yesBtn.style.padding = `${currentPadding * 1.2}px ${currentPadding * 2}px`;
+        }
+
+        function handleYesClick() {
+            // Replace the content with the success message and image
+            document.querySelector('.container').innerHTML = `
+                <img src="https://media.tenor.com/gUiu1zyxfzYAAAAi/bear-kiss-bear-kisses.gif" alt="Bear Kiss">
+                <h1 class="success-message">Yay!!! I knew you would say yes! ❤️</h1>
+            `;
+        }
+    </script>
+</body>
+</html>
